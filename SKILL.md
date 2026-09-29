@@ -71,6 +71,16 @@ python scripts/hunt_fast.py --seeds 02_work/seeds.json --title "片名(年份)" 
 工作区可放任意位置（Windows / macOS / Linux 均可），结构与名字保持上面的约定即可。
 新建任务：`mkdir -p <片名>_<年份>/{00_docs,01_assets,02_work,03_output,04_logs}`，再把本技能 `scripts/` 下的脚本拷进 `02_work/`。
 
+**默认位置（用户没指定时按此建，保证换机行为一致）**：
+
+| 平台 | 根工作区 |
+|---|---|
+| Windows | `%USERPROFILE%\Desktop\网盘资源核验_<YYYYMMDD>\` |
+| macOS / Linux | `~/Desktop/网盘资源核验_<YYYYMMDD>/` |
+
+`<YYYYMMDD>` 取当天日期。**已存在同名根工作区就复用它，不要另建第二个**；
+只有用户明确指定了别的位置时才改变。根工作区下的 `README.md` 为任务索引，每完成一个任务追加一行。
+
 ---
 
 ## 阶段 2｜挖源
