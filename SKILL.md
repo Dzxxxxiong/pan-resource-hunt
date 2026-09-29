@@ -298,10 +298,22 @@ python build_package.py && python install.py
 ```
 
 交给另一台电脑的 AI 一句话即可：
-「克隆 `<REPO_URL>` 到 `~/.workbuddy/skills/pan-resource-hunt/`，跑 `python install.py` 安装，用 `--help` 验证并汇报」。
+「克隆 `<REPO_URL>` 到 `~/.workbuddy/skills/pan-resource-hunt/`，确认 `SKILL.md` 在根且含
+`name: pan-resource-hunt`，用 `hunt_fast.py --help` 与 `hunt_sources.py --help` 验证并汇报」。
 
 仓库内 `AI_DEPLOY.md` 是给 AI 的执行契约（前置检查 / 步骤 / 验证口径 / 失败换路表）。
 `DEPLOY.md` 是给人看的完整指南 + FAQ。
 
 > 层级必须是 `skills/pan-resource-hunt/SKILL.md`；多套一层技能不被识别。
 > **修 bug 只改权威源（本目录），再向仓库与任务目录同步** —— 任务目录里的副本是快照。
+
+### 换机部署的坑（2026-09-29 实测）
+
+- **clone 到位后不要再跑 `install.py`**：该脚本不带 `--target` 时默认目标是用户级 skill 目录，
+  在已 clone 到位的目录里执行等于「源=目标」，会重复安装并留下 `pan-resource-hunt.bak-*`。
+  到位后验证只需 `python scripts/hunt_fast.py --help`。
+- **`install.py` 只在两种场景用**：① 解压离线 zip 后；② 克隆到别处（如 `/tmp/prh`）再装到 skill 目录。
+  不带 `--target` 一律装到用户级目录，想装别处必须显式给 `--target`。
+- **公开仓库匿名 clone 已实测可用**：`git -c credential.helper= clone <URL> <skill目录>`，
+  在禁用全部凭证助手的条件下成功 → 说明无需账号、无需 token 即可分发。
+- 文档里的 `<REPO_URL>` / `{{REPO_URL}}` 是占位符，分发前由 `push_to_github.py` 自动替换成本仓库地址。
