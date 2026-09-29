@@ -94,8 +94,7 @@ pan-resource-hunt/
 ├── scripts/
 │   ├── hunt_fast.py         ★ 核验首选：并发 + 单请求短路 + 缓存 + 探活串联 + 变体匹配
 │   ├── hunt_sources.py      ★ 挖源半自动：PanSou 打源 / 页面抽链接 / 渠道探针 / 合并去重
-│   ├── hunt.py              遗留串行版（保留参考）
-│   └── verify_pan.py        已废弃（早期原型）
+│   └── hunt.py              遗留串行版（保留参考）
 ├── references/
 │   ├── sources.md           渠道清单 / 关键词变体规律 / PanSou 实例状态
 │   └── templates.md         四套文档模板
