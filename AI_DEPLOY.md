@@ -28,30 +28,34 @@
 
 若用户要求项目级部署，改为 `<项目根>/.workbuddy/skills/pan-resource-hunt`。
 
-### 2. 安装（三选一，按当前仓库形态）
+### 2. 安装（四选一，按当前仓库形态）
 
-**A. 已有本地仓库副本** → 直接安装：
-
-```bash
-python install.py --prune
-```
-
-**B. 远程仓库，目标位置就绪** → clone 直用：
+**A. 远程仓库，skill 目录为空或不存在** → clone 直用（**推荐**，可 `git pull` 更新）：
 
 ```bash
 git clone <REPO_URL> "<skill根目录>"
 ```
 
-**C. 远程仓库，目标位置已有旧版** → 克隆到临时目录再安装（会先备份）：
+> 仓库根就是 skill 根，clone 完即可用，**不要再跑 `install.py`**（会重复安装并产生多余备份目录）。
+> 若目标目录已存在旧版，先重命名备份：`mv "<skill根目录>" "<skill根目录>.bak-$(date +%Y%m%d%H%M%S)"`。
+
+**B. 远程仓库，想得到「干净」skill 目录（不含仓库工具文件）** → 克隆到临时目录再安装：
 
 ```bash
 git clone <REPO_URL> /tmp/prh && python /tmp/prh/install.py --prune
 ```
 
+**C. 已有本地仓库副本** → 直接安装：
+
+```bash
+python install.py --prune
+```
+
 **D. 离线分发包（zip）** → 解压后 `python install.py`。
 
 > `install.py` 自动识别两种布局：仓库根即 skill（`SKILL.md`）或包内 `skill/` 子目录。
-> 默认先备份旧版本；需覆盖加 `--force`；先看不做加 `--dry-run`。
+> 默认先备份旧版本；需覆盖加 `--force`；先看不做加 `--dry-run`；`--prune` 只清 `__pycache__`。
+> ⚠️ 不带 `--target` 时默认装到用户级 skill 目录；想装到别处必须显式给 `--target`。
 
 ### 3. 验证（必须全过）
 
@@ -110,3 +114,5 @@ python "<skill根目录>/scripts/hunt_sources.py" --help
 - 不要改 `scripts/` 下的判定逻辑来"让它跑起来" —— 判活只看 `share_page_type` + `errno`，改文案匹配会引入误杀 bug。
 - 不要把并发调高到 16 以上（触发百度风控）。
 - 不要在本机执行渠道探测以外的大规模请求来"验证部署"；部署验证只到 `--help` 为止。
+- **不要在已 clone 到位的 skill 目录里跑 `install.py`**（源=目标，会造成重复安装 + 多余 `.bak-*` 目录）。
+  该目录下验证部署用 `python scripts/hunt_fast.py --help` 即可。

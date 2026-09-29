@@ -13,10 +13,21 @@
 
 ## AI 一键部署（把下面整段发给另一台电脑的 AI）
 
-> 请帮我把这个 skill 部署到本机：克隆 `{{REPO_URL}}` 到
-> `~/.workbuddy/skills/pan-resource-hunt/`，然后运行 `python install.py` 完成安装，
-> 最后用 `hunt_fast.py --help` 和 `hunt_sources.py --help` 验证，并把结果告诉我。
-> 如果目标目录已存在，先备份旧版本。
+> 请帮我把这个 skill 部署到本机：
+>
+> 1. 先把 `{{REPO_URL}}` 克隆到 skill 目录 `~/.workbuddy/skills/pan-resource-hunt`
+>    （Windows 是 `%USERPROFILE%\.workbuddy\skills\pan-resource-hunt`）。
+>    若该目录已存在，先重命名为 `pan-resource-hunt.bak-<时间戳>` 备份，再克隆。
+> 2. 确认 `<skill目录>/SKILL.md` 存在，且首部含 `name: pan-resource-hunt`
+>    （若变成 `pan-resource-hunt/pan-resource-hunt/SKILL.md`，说明多套了一层，需上移）。
+> 3. 用 `python "<skill目录>/scripts/hunt_fast.py" --help` 和
+>    `python "<skill目录>/scripts/hunt_sources.py" --help` 验证，两条都要输出 `usage:` 且无 `Traceback`。
+> 4. 把绝对路径、Python 版本、两步验证结果告诉我。
+>
+> 不需要 `pip install`，不需要虚拟环境（零第三方依赖）。
+>
+> **注意**：克隆到 skill 目录后**不要再跑 `install.py`** —— 它会把文件重装一遍并生成多余的备份目录。
+> `install.py` 只在「解压离线 zip」或「克隆到别处再安装」时才用。
 
 ---
 
