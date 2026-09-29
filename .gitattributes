@@ -1,0 +1,15 @@
+# 跨平台换行统一（避免 Windows 检出 CRLF 污染脚本 diff）
+* text=auto eol=lf
+*.py   text eol=lf
+*.md   text eol=lf
+*.json text eol=lf
+*.sh   text eol=lf
+*.ps1  text eol=crlf
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+
+# 二进制
+*.zip binary
+*.png binary
+*.jpg binary
+*.ico binary

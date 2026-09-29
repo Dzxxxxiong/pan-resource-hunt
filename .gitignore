@@ -1,0 +1,36 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- 任务产物（不进仓库：含个人检索数据与链接）----
+cache.json
+*_cache.json
+seeds*.json
+verify_*.json
+links_clean.json
+*.log
+网盘资源核验_*/
+*_202[0-9]/
+_bak/
+*.bak
+*.bak-*/
+
+# ---- 分发产物 ----
+*.zip
+dist/
